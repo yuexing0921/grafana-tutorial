@@ -5,7 +5,7 @@ services:
     container_name: prometheus
     hostname: prometheus
     ports:
-      - 9090:9090
+      - 9091:9090
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
   prometheus-exporter:
@@ -20,6 +20,9 @@ services:
     hostname: grafana
     ports:
       - 3000:3000
+    environment:
+      - GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS=vertamedia-clickhouse-datasource
     volumes:  
       - ./grafana.ini:/etc/grafana/grafana.ini
+      - ./data:/var/lib/grafana
 
